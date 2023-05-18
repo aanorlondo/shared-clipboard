@@ -15,8 +15,8 @@ spec:
         app: clipboard-mongodb
     spec:
       containers:
-        - name: mongo
-          image: mongo:4.4.8
+        - name: clipboard-mongodb
+          image: negan/clipboard-mongo:latest
           resources:
             limits:
               cpu: "1"
@@ -30,16 +30,29 @@ spec:
           
           # env vars
           env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: clipboard-secrets
-                key: mongo-user
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: clipboard-secrets
-                key: mongo-password 
+            # secrets
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: clipboard-secrets
+                  key: mongo-user
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: clipboard-secrets
+                  key: mongo-password
+
+            # config maps
+            - name: MONGO_INITDB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: mongo-db-name
+            - name: MONGO_COLLECTION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: mongo-collection-name
 
       volumes:
         - name: mongo-data

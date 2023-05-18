@@ -34,7 +34,7 @@ COPY --from=build-stage /app/dist .
 RUN npm install -g http-server
 
 # Expose the default HTTP port
-EXPOSE 80
+# EXPOSE 80
 
 # Set the entrypoint script
 COPY entrypoint.sh /app/entrypoint.sh

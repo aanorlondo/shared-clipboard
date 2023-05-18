@@ -27,11 +27,7 @@ spec:
               
           # env vars
           env:
-            - name: MONGO_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: clipboard-external-config
-                  key: MONGO_URL
+            # secrets
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
@@ -42,8 +38,31 @@ spec:
                 secretKeyRef:
                   name: clipboard-secrets
                   key: mongo-password
+
+            # config maps
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: mongo-url
+            - name: MONGO_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: mongo-db-name
+            - name: MONGO_COLLECTION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: mongo-collection-name
+            - name: BACKEND_ROUTE
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: backend-route
             - name: BACKEND_PORT
               value: "8080"
+              
 ---
 apiVersion: v1
 kind: Service
