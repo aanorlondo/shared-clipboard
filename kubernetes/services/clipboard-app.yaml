@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clipboard-app
+  labels:
+    app: clipboard-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clipboard-app
+  template:
+    metadata:
+      labels:
+        app: clipboard-app
+    spec:
+      containers:
+        - name: clipboard-app
+          image: negan/clipboard-back:latest
+          resources:
+            limits:
+              cpu: "500m"
+              memory: 512Mi
+            requests:
+              cpu: "200m"
+              memory: 256Mi
+              
+          # env vars
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: MONGO_URL
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: clipboard-secrets
+                  key: mongo-username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: clipboard-secrets
+                  key: mongo-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clipboard-app
+spec:
+  selector:
+    app: clipboard-app
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

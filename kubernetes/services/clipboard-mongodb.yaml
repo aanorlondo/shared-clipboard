@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clipboard-mongodb
+  labels:
+    app: clipboard-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clipboard-mongodb
+  template:
+    metadata:
+      labels:
+        app: clipboard-mongodb
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:4.4.8
+          resources:
+            limits:
+              cpu: "1"
+              memory: 2Gi
+            requests:
+              cpu: "500m"
+              memory: 1Gi
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+          
+          # env vars
+          env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: clipboard-secrets
+                key: mongo-user
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: clipboard-secrets
+                key: mongo-password 
+
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clipboard-mongodb
+spec:
+  selector:
+    app: clipboard-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
