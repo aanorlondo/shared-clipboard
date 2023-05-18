@@ -1,32 +1,25 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
-
 const app = express();
+
+// Middleware
+app.use(express.json())
+
+// Enable CORS
+app.use(cors())
+
+// Backend env vars
 const port = process.env.BACKEND_PORT || 8080;
 const route = process.env.BACKEND_ROUTE || 'clipboards';
 const dbName = process.env.MONGO_DB_NAME || "clipboards"
 const mongo_collection = process.env.MONGO_COLLECTION_NAME || 'entries'
 const endpoint = `/${route}`
-
-// Middleware
-app.use(bodyParser.text());
-
-
-// Enable CORS
-app.use(cors())
-
-// MongoDB credentials
 const username = process.env.MONGO_USERNAME || '';
 const password = process.env.MONGO_PASSWORD || '';
-
-// MongoDB Connection URL
 const mongoUrl = process.env.MONGO_URL || 'clipboard-mongodb';
-
-// MongoDB Host name
-const mongoHost = `mongodb://${username}:${password}@${mongoUrl}`
+const mongoHost = `mongodb://${username}:${password}@${mongoUrl}/${dbName}`
 
 // MongoDB authentication options
 let mongoClientOptions = {
@@ -42,7 +35,7 @@ app.post(endpoint, (req, res) => {
         content,
         timestamp: new Date().toISOString()
     };
-    console.log(`Received POST Request: ${JSON.stringify(content)}`)
+    console.log(`Received POST Request: ${JSON.stringify(entry)}`)
     console.log(`Connecting to Mongo host on: ${mongoHost}`)
     MongoClient.connect(mongoHost, mongoClientOptions, (err, client) => {
         if (err) {
@@ -64,9 +57,9 @@ app.post(endpoint, (req, res) => {
             }
 
             res.status(201).send(`Entry: ${entry} saved successfully`);
+            client.close();
         });
 
-        client.close();
     });
 });
 
@@ -93,11 +86,11 @@ app.get(endpoint, (req, res) => {
                 return;
             }
 
-            console.log(`Retrieved entries from DB: ${entries}`)
+            console.log(`Retrieved entries from DB: ${entries.values}`)
             res.json(entries);
+            client.close();
         });
 
-        client.close();
     });
 });
 

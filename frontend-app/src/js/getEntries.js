@@ -14,9 +14,11 @@ export default {
     },
     methods: {
         async fetchEntries() {
+            console.log(`Fetching GET request from endpoint: ${endpoint}`)
             try {
                 const response = await fetch(endpoint);
                 if (response.ok) {
+                    console.log("Succesfully loaded entries !")
                     this.entries = await response.json();
                 } else {
                     console.error('Failed to fetch entries:', response.status, response.statusText);
@@ -24,6 +26,11 @@ export default {
             } catch (error) {
                 console.error('Error fetching entries:', error);
             }
+        },
+
+        formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleDateString();
         },
     },
 };

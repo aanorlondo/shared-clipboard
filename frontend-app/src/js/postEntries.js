@@ -14,7 +14,7 @@ export default {
     methods: {
         async addEntry() {
             try {
-
+                console.log(`Sending POST request: ${JSON.stringify(this.newEntry)} to endpoint: ${endpoint}`)
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
@@ -24,7 +24,7 @@ export default {
                 });
 
                 if (response.ok) {
-                    console.log('Entry added successfully!');
+                    console.log("Entry successfully created !");
                     // Reset the form after submitting
                     this.newEntry = {
                         content: ''

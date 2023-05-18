@@ -1,46 +1,27 @@
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+/* APP */
+
+#app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    font-family: monospace;
+    min-height: 100vh;
+    max-height: 100vh;
 }
 
-h1 {
-    font-size: 24px;
-    font-style: italic;
-    color: #333;
+.app-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: center;
+    max-width: 70%;
 }
 
-h3 {
-    font-style: italic;
-}
-
-.entry-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-.entry-item {
-    margin-bottom: 5px;
-}
-
-.entry-list li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-}
-
-.entry-form textarea[type="text"] {
-    width: 20%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-.entry-form button {
+button {
     padding: 10px 20px;
     background-color: #1369d2;
     color: #fff;
@@ -50,20 +31,134 @@ h3 {
     cursor: pointer;
 }
 
+
+/* HEADER */
+
+.header {
+    position: fixed;
+}
+
+#header {
+    background-color: #2479d3;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    width: 69%;
+    max-width: 69%;
+}
+
+.header-title {
+    color: #fff;
+    padding: 10px;
+    font-size: 24px;
+}
+
+
+/* ENTRIES GRID */
+
+.entries-grid-wrapper {
+    flex: 1;
+    width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    margin: 0 auto;
+}
+
+.container {
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+}
+
+.entries-header {
+    position: sticky;
+    top: 0;
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.entries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    width: 100%;
+}
+
+.entry-item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+.entry-content {
+    color: #091a2b;
+}
+
+.timestamp {
+    color: #2479d3;
+    font-style: italic;
+}
+
+.no-data {
+    text-align: center;
+    color: #cf3423;
+}
+
+
+/* EntriesFrom */
+
+.form-wrapper {
+    width: 100%;
+    max-width: 97%;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #f8f8f8;
+}
+
+.entry-form textarea[type="text"] {
+    width: 98%;
+    max-width: 98%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
 .entry-form button:hover {
     background-color: #022448;
 }
 
-.resizable {
-    resize: vertical;
-    resize: both;
-    min-height: 50px;
+
+/* Footer */
+
+.footer-wrapper {
+    width: 100%;
 }
 
-.submit-wrapper {
-    margin-top: 10px;
+#footer {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
 }
 
-.no-data {
-    color: #cf3423;
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.github-logo {
+    width: 70px;
+    margin-right: 10px;
+}
+
+.copy {
+    font-size: 12px;
+    color: #888888;
 }
