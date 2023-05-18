@@ -1,6 +1,6 @@
-const host = process.env.BACKEND_HOST || 'clipboard-app';
-const port = process.env.BACKEND_PORT || '8080';
-const route = process.env.BACKEND_ROUTE || 'clipboards';
+const host = process.env.VUE_APP_BACKEND_HOST || 'localhost';
+const port = process.env.VUE_APP_BACKEND_PORT || '8080';
+const route = process.env.VUE_APP_BACKEND_ROUTE || 'clipboards';
 const endpoint = `http://${host}:${port}/${route}`;
 
 export default {

@@ -8,7 +8,12 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install the dependencies
-RUN npm ci
+RUN npm install
+
+# Generate .env file
+RUN echo "VUE_APP_BACKEND_HOST=$BACKEND_HOST" > .env \
+    && echo "VUE_APP_BACKEND_PORT=$BACKEND_PORT" >> .env \
+    && echo "VUE_APP_BACKEND_ROUTE=$BACKEND_ROUTE" >> .env
 
 # Copy the rest of the application code
 COPY . .
@@ -31,5 +36,7 @@ RUN npm install -g http-server
 # Expose the default HTTP port
 EXPOSE 80
 
-# Start the web server
-CMD ["http-server", "-p", "80"]
+# Set the entrypoint script
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["sh", "/app/entrypoint.sh"]
