@@ -24,9 +24,6 @@ spec:
             requests:
               cpu: "500m"
               memory: 1Gi
-          volumeMounts:
-            - name: mongo-data
-              mountPath: /data/db
           
           # env vars
           env:
@@ -35,7 +32,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: clipboard-secrets
-                  key: mongo-user
+                  key: mongo-username
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -53,11 +50,6 @@ spec:
                 configMapKeyRef:
                   name: clipboard-external-config
                   key: mongo-collection-name
-
-      volumes:
-        - name: mongo-data
-          persistentVolumeClaim:
-            claimName: mongo-pvc
 ---
 apiVersion: v1
 kind: Service
