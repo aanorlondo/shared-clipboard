@@ -25,17 +25,9 @@ docker-compose.yml
 # Ignore package-lock.json for npm
 package-lock.json
 
-# Ignore yarn.lock for Yarn
-yarn.lock
-
 # Ignore logs
 logs/
 
 # Ignore OS-generated files
 .DS_Store
 Thumbs.db
-
-# Ignore custom files and directories
-custom-file.txt
-custom-directory/
-

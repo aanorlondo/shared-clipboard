@@ -72,6 +72,6 @@ spec:
   selector:
     app: clipboard-app
   ports:
-    - name: http
+    - name: TCP
       port: 8080
       targetPort: 8080
