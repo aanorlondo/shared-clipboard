@@ -15,7 +15,8 @@ export BACKEND_ROUTE="clipboards"
 
 
 # build and run the mongo db
-docker build -t mongo:latest .
+docker build -t negan/clipboard-mongo:latest ../mongo-init
+docker push negan/clipboard-mongo:latest
 docker run \
     -d \
     -p 27017:27017 \
@@ -24,7 +25,7 @@ docker run \
     -e MONGO_INITDB_DATABASE=$MONGO_DB_NAME \
     -e MONGO_COLLECTION_NAME=$MONGO_COLLECTION_NAME \
     --name CLIPBOARDS-MONGO \
-    mongo:latest
+    negan/clipboard-mongo:latest
 
 
 # build and run the backend app
@@ -53,5 +54,5 @@ docker run \
     -e BACKEND_HOST=$BACKEND_HOST \
     -e BACKEND_PORT=$BACKEND_PORT \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
-    --name CLIPBOARDS_FRONTEND \
-    negan/clipboard-front:latest 
+    --name CLIPBOARDS-FRONTEND \
+    negan/clipboard-front:latest
