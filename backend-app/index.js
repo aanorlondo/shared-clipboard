@@ -18,7 +18,7 @@ const mongo_collection = process.env.MONGO_COLLECTION_NAME || 'entries'
 const endpoint = `/${route}`
 const username = process.env.MONGO_USERNAME || '';
 const password = process.env.MONGO_PASSWORD || '';
-const mongoUrl = process.env.MONGO_URL || 'clipboard-mongodb';
+const mongoUrl = process.env.MONGO_URL || 'clipboard-mongodb-service';
 const mongoHost = `mongodb://${username}:${password}@${mongoUrl}/${dbName}`
 
 // MongoDB authentication options

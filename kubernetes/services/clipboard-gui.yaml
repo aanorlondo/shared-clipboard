@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clipboard-gui
+  name: clipboard-gui-deployment
   labels:
     app: clipboard-gui
 spec:
@@ -41,7 +41,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: clipboard-gui
+  name: clipboard-gui-service
 spec:
   type: NodePort
   selector:

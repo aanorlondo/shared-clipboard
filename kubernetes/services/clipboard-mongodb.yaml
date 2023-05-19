@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clipboard-mongodb
+  name: clipboard-mongodb-deployment
   labels:
     app: clipboard-mongodb
 spec:
@@ -58,7 +58,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: clipboard-mongodb
+  name: clipboard-mongodb-service
 spec:
   selector:
     app: clipboard-mongodb

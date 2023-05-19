@@ -12,7 +12,7 @@
 </template>
   
 <script>
-const host = process.env.VUE_APP_BACKEND_HOST || 'clipboard-app';
+const host = process.env.VUE_APP_BACKEND_HOST || 'clipboard-app-service';
 const port = process.env.VUE_APP_BACKEND_PORT || '8080';
 const route = process.env.VUE_APP_BACKEND_ROUTE || 'clipboards';
 const endpoint = `http://${host}:${port}/${route}`;
