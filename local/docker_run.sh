@@ -1,20 +1,12 @@
 #!/bin/bash
 
+# env vars
+source ./prepare_local.sh
+
 # clean first
 docker rm -f CLIPBOARDS-MONGO-LOCAL
 docker rm -f CLIPBOARDS-BACKEND-LOCAL
 docker rm -f CLIPBOARDS-FRONTEND-LOCAL
-
-export MONGO_USERNAME="username"
-export MONGO_PASSWORD="password"
-export MONGO_URL="host.docker.internal:27017"
-export MONGO_DB_NAME="clipboards"
-export MONGO_COLLECTION_NAME="entries"
-
-export BACKEND_HOST="localhost"
-export BACKEND_PORT="8080"
-export BACKEND_ROUTE="clipboards"
-
 
 # run the mongo db
 docker run \

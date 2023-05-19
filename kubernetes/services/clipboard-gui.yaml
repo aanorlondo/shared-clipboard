@@ -28,7 +28,7 @@ spec:
           # env vars
           env:
             - name: VUE_APP_BACKEND_HOST
-              value: clipboard-app
+              value: clipboard-app-service
             - name: VUE_APP_BACKEND_PORT
               value: "8080"
             - name: VUE_APP_BACKEND_ROUTE

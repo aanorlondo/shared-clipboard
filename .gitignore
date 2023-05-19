@@ -6,7 +6,7 @@ build/
 dist/
 
 # Ignore environment variables file
-.env
+.env*
 
 # Ignore coverage reports
 coverage/
