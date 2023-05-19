@@ -33,6 +33,10 @@ spec:
               value: "8080"
             - name: VUE_APP_BACKEND_ROUTE
               value: clipboards
+          
+          # container port
+          ports:
+          - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +47,7 @@ spec:
   selector:
     app: clipboard-gui
   ports:
-    - name: TCP
+    - protocol: TCP
       port: 80
       targetPort: 80
       nodePort: 30001
