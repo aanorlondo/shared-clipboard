@@ -1,7 +1,6 @@
 <template>
-    <header id="header">
-        <h1>{{ title }}</h1>
-    </header>
+    <h1>{{ title }}</h1>
+    <img src="../assets/media/icon_2.png" id="header-logo">
 </template>
   
 <script>

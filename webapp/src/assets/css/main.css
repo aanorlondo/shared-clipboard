@@ -42,6 +42,16 @@ button:hover {
     max-width: 100%;
     border-radius: 20px;
     font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#header-logo {
+    width: 45px;
+    vertical-align: middle;
 }
 
 

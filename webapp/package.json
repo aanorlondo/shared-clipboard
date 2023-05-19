@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Web application for clipboard sharing",
     "scripts": {
+        "serve": "vue-cli-service serve",
         "build": "vue-cli-service build"
     },
     "dependencies": {
