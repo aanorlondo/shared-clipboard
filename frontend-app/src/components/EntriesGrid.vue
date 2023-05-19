@@ -1,7 +1,6 @@
 <template>
     <div class="entries-header">
         <h3>Available Entries:</h3>
-        <button @click="fetchEntries">Refresh</button>
     </div>
     <div class="entries-grid">
         <div v-for="entry in entries" :key="entry.id" class="entry-item">
@@ -9,6 +8,10 @@
             <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
         </div>
         <div v-if="entries.length === 0" class="no-data">No Data</div>
+    </div>
+    <div class="entries-footer">
+        <button @click="fetchEntries">Refresh</button>
+        <button @click="clearAllEntries">Clear All</button>
     </div>
 </template>
   
@@ -40,6 +43,22 @@ export default {
                 }
             } catch (error) {
                 console.error('Error fetching entries:', error);
+            }
+        },
+
+        async clearAllEntries() {
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'DELETE'
+                });
+                if (response.ok) {
+                    console.log('All entries cleared successfully!');
+                    this.entries = [];
+                } else {
+                    console.error('Failed to clear entries:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error clearing entries:', error);
             }
         },
 

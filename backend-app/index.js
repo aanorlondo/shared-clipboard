@@ -27,6 +27,23 @@ let mongoClientOptions = {
     useUnifiedTopology: true
 };
 
+// Default GET route
+app.get('/', (req, res) => {
+    const htmlContent = `
+        <html>
+            <head>
+                <title>My Shared Clipboards Server</title>
+            </head>
+            <body>
+                <h3>My Shared Clipboards Server is running !<h3>
+                <p>Backend app listening on port: ${port}</p>
+                <p>MongoDB endpoint: ${mongoUrl}</p>
+            </body>
+        </html>
+    `;
+    res.send(htmlContent);
+});
+
 // Save clipboard entry to MongoDB
 app.post(endpoint, (req, res) => {
     const content = req.body;
@@ -91,6 +108,35 @@ app.get(endpoint, (req, res) => {
             client.close();
         });
 
+    });
+});
+
+// Clear all clipboard entries in MongoDB
+app.delete(endpoint, (req, res) => {
+    console.log('Clearing all entries...');
+    console.log(`Connecting to Mongo host on: ${mongoHost}`);
+    MongoClient.connect(mongoHost, mongoClientOptions, (err, client) => {
+        if (err) {
+            console.error('Error connecting to MongoDB:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        console.log(`Connecting to Mongo host on: SUCCESS`);
+        const db = client.db(dbName);
+        const collection = db.collection(mongo_collection);
+
+        console.log(`Removing all entries from DB...`);
+        collection.deleteMany({}, (err) => {
+            if (err) {
+                console.error('Error clearing entries in MongoDB:', err);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+
+            res.status(204).send('All entries cleared successfully');
+            client.close();
+        });
     });
 });
 
