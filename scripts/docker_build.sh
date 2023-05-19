@@ -7,7 +7,6 @@ docker build -t negan/clipboard-back:latest ../backend-app
 
 # Prepare and build front
 echo "VUE_APP_BACKEND_HOST=${BACKEND_HOST}" > "../frontend-app/.env.production" 
-echo "VUE_APP_BACKEND_PORT=${BACKEND_PORT}" >> "../frontend-app/.env.production" 
 echo "VUE_APP_BACKEND_ROUTE=${BACKEND_ROUTE}" >> "../frontend-app/.env.production"
 
 docker build -t negan/clipboard-front:latest ../frontend-app

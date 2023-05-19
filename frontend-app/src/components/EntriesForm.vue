@@ -14,9 +14,8 @@
   
 <script>
 const host = process.env.VUE_APP_BACKEND_HOST;
-const port = process.env.VUE_APP_BACKEND_PORT;
 const route = process.env.VUE_APP_BACKEND_ROUTE;
-const endpoint = host == "localhost" ? `http://${host}:${port}/${route}` : process.env.VUE_APP_BACKEND_HOST;
+const endpoint = `http://${host}/${route}`;
 
 export default {
     data() {

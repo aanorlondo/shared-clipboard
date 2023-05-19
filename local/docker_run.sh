@@ -40,7 +40,6 @@ docker run \
     -d \
     -p 80:80 \
     -e BACKEND_HOST=$BACKEND_HOST \
-    -e BACKEND_PORT=$BACKEND_PORT \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
     --name CLIPBOARDS-FRONTEND-LOCAL \
     negan/clipboard-front:local
