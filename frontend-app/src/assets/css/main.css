@@ -74,7 +74,7 @@ button:hover {
 
 .entries-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(50vh, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(50vh, auto));
     gap: 5px;
     width: 100%;
 }
@@ -99,6 +99,26 @@ button:hover {
     background-color: #ccc;
 }
 
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+}
+
+.entry-content {
+    margin-top: auto;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.entry-item button {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
 .entry-content {
     color: #091a2b;
 }
@@ -106,6 +126,10 @@ button:hover {
 .timestamp {
     color: #2479d3;
     font-style: italic;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .entries-footer {

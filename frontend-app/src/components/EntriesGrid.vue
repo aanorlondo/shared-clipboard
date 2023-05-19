@@ -4,9 +4,11 @@
     </div>
     <div class="entries-grid">
         <div v-for="entry in entries" :key="entry.id" class="entry-item">
+            <div class="entry-header">
+                <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
+                <button @click="deleteEntry(entry.id)">Delete</button>
+            </div>
             <p class="entry-content">{{ entry.content.content }}</p>
-            <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
-            <button @click="deleteEntry(entry.id)">Delete</button>
         </div>
         <div v-if="entries.length === 0" class="no-data">No Data</div>
     </div>
@@ -87,7 +89,16 @@ export default {
 
         formatDate(timestamp) {
             const date = new Date(timestamp);
-            return date.toLocaleDateString();
+            const options = {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                timeZone: "Europe/Paris",
+            };
+            return date.toLocaleString("fr-FR", options);
         },
     },
 };
