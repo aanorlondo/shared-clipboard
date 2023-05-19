@@ -5,8 +5,7 @@ source ./prepare_local.sh
 
 # clean first
 docker rm -f CLIPBOARDS-MONGO-LOCAL
-docker rm -f CLIPBOARDS-BACKEND-LOCAL
-docker rm -f CLIPBOARDS-FRONTEND-LOCAL
+docker rm -f CLIPBOARDS-WEBAPP-LOCAL
 
 # run the mongo db
 docker run \
@@ -23,7 +22,7 @@ docker run \
 # run the backend app
 docker run \
     -d \
-    -p 8080:8080 \
+    -p 3000:3000 \
     -e MONGO_USERNAME=$MONGO_USERNAME \
     -e MONGO_PASSWORD=$MONGO_PASSWORD \
     -e MONGO_URL=$MONGO_URL \
@@ -31,15 +30,5 @@ docker run \
     -e MONGO_COLLECTION_NAME=$MONGO_COLLECTION_NAME \
     -e BACKEND_PORT=$BACKEND_PORT \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
-    --name CLIPBOARDS-BACKEND-LOCAL \
-    negan/clipboard-back:local
-
-
-# run the frontend app
-docker run \
-    -d \
-    -p 80:80 \
-    -e BACKEND_HOST=$BACKEND_HOST \
-    -e BACKEND_ROUTE=$BACKEND_ROUTE \
-    --name CLIPBOARDS-FRONTEND-LOCAL \
-    negan/clipboard-front:local
+    --name CLIPBOARDS-WEBAPP-LOCAL \
+    negan/clipboard-webapp:local

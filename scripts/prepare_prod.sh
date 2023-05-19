@@ -1,5 +1,4 @@
 #!/bin/bash
 
-# frontent
-export BACKEND_HOST="clipboard-app-service"
+# webapp
 export BACKEND_ROUTE="clipboards"

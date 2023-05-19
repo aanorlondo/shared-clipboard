@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clipboard-app-deployment
+  name: clipboard-webapp-deployment
   labels:
-    app: clipboard-app
+    app: clipboard-webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: clipboard-app
+      app: clipboard-webapp
   template:
     metadata:
       labels:
-        app: clipboard-app
+        app: clipboard-webapp
     spec:
       containers:
-        - name: clipboard-app
-          image: negan/clipboard-back:latest
+        - name: clipboard-webapp
+          image: negan/clipboard-webapp:latest
           resources:
             limits:
               cpu: "500m"
@@ -65,16 +65,18 @@ spec:
           
           # container port
           ports:
-          - containerPort: 8080    
+          - containerPort: 3000    
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: clipboard-app-service
+  name: clipboard-webapp-service
 spec:
-  selector:
-    app: clipboard-app
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
+type: NodePort
+selector:
+  app: clipboard-webapp
+ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+    nodePort: 30100

@@ -10,6 +10,9 @@ app.use(express.json())
 // Enable CORS
 app.use(cors())
 
+// Serve front
+app.use(express.static(path.join(__dirname, 'dist')));
+
 // Backend env vars
 const port = process.env.BACKEND_PORT
 const route = process.env.BACKEND_ROUTE;
