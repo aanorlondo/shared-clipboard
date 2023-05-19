@@ -96,7 +96,7 @@ app.get(endpoint, (req, res) => {
         const collection = db.collection(mongo_collection);
 
         console.log(`Reading elements from DB...`)
-        collection.find({}).toArray((err, entries) => {
+        collection.find({}).sort({ timestamp: -1 }).toArray((err, entries) => {
             if (err) {
                 console.error('Error retrieving entries from MongoDB:', err);
                 res.status(500).send('Internal Server Error');

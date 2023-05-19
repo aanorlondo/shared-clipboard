@@ -78,7 +78,7 @@ export default {
                 });
                 if (response.ok) {
                     console.log('Entry deleted successfully!');
-                    this.fetchEntries();
+                    this.entries = this.entries.filter((entry) => entry.id !== entryId);
                 } else {
                     console.error('Failed to delete entry:', response.status, response.statusText);
                 }
