@@ -1,24 +1,23 @@
 <template>
-    <div class="container">
-        <div class="entries-header">
-            <h3>Available Entries:</h3>
-            <button class="refresh-button" @click="fetchEntries">Refresh</button>
+    <div class="entries-header">
+        <h3>Available Entries:</h3>
+        <button @click="fetchEntries">Refresh</button>
+    </div>
+    <div class="entries-grid">
+        <div v-for="entry in entries" :key="entry.id" class="entry-item">
+            <p class="entry-content">{{ entry.content.content }}</p>
+            <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
         </div>
-        <div class="entries-grid">
-            <div v-for="entry in entries" :key="entry.id" class="entry-item">
-                <p class="entry-content">{{ entry.content.content }}</p>
-                <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
-            </div>
-            <div v-if="entries.length === 0" class="no-data">No Data</div>
-        </div>
+        <div v-if="entries.length === 0" class="no-data">No Data</div>
     </div>
 </template>
   
 <script>
-const host = process.env.VUE_APP_BACKEND_HOST || 'clipboard-app-service';
-const port = process.env.VUE_APP_BACKEND_PORT || '8080';
-const route = process.env.VUE_APP_BACKEND_ROUTE || 'clipboards';
-const endpoint = `http://${host}:${port}/${route}`;
+const host = process.env.VUE_APP_BACKEND_HOST;
+const port = process.env.VUE_APP_BACKEND_PORT;
+const route = process.env.VUE_APP_BACKEND_ROUTE;
+const endpoint = host == "localhost" ? `http://${host}:${port}/${route}` : process.env.VUE_APP_BACKEND_HOST;
+
 export default {
     data() {
         return {

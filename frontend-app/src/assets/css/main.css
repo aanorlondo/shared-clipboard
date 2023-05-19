@@ -5,26 +5,15 @@ body {
 }
 
 #app {
+    font-family: monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
     max-width: 100%;
-    font-family: monospace;
     min-height: 100vh;
     max-height: 100vh;
-}
-
-.app-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     overflow-y: auto;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 70%;
 }
 
 button {
@@ -37,45 +26,32 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: #110807;
+}
+
 
 /* HEADER */
 
-.header {
-    position: fixed;
-}
-
-#header {
+.header-wrapper {
     background-color: #2479d3;
     color: #fff;
-    padding: 10px;
     text-align: center;
-    width: 69%;
-    max-width: 69%;
-}
-
-.header-title {
-    color: #fff;
-    padding: 10px;
-    font-size: 24px;
+    min-width: 100%;
+    max-width: 100%;
+    border-radius: 20px;
+    font-size: 12px;
 }
 
 
 /* ENTRIES GRID */
 
 .entries-grid-wrapper {
-    flex: 1;
-    width: 100%;
     min-height: 100%;
     max-height: 100%;
     overflow-y: auto;
-    margin: 0 auto;
     background-color: #888888;
-}
-
-.container {
-    justify-content: center;
-    align-items: center;
-    max-width: 100%;
+    border-radius: 20px;
 }
 
 .entries-header {
@@ -89,9 +65,15 @@ button {
     z-index: 1;
 }
 
+.no-data {
+    text-align: center;
+    color: #4b0d06;
+    background-color: #888888;
+}
+
 .entries-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(50vh, 1fr));
     gap: 5px;
     width: 100%;
 }
@@ -117,34 +99,32 @@ button {
     font-style: italic;
 }
 
-.no-data {
-    text-align: center;
-    color: #4b0d06;
-    background-color: #888888;
-}
-
 
 /* EntriesFrom */
 
 .form-wrapper {
-    width: 100%;
-    max-width: 97%;
-    padding: 20px;
-    margin: 0 auto;
+    min-width: 100%;
+    max-width: 100%;
     background-color: #f8f8f8;
+    border-radius: 20px;
 }
 
-.entry-form textarea[type="text"] {
-    width: 98%;
-    max-width: 98%;
+.form-container {
     padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
 }
 
-.entry-form button:hover {
-    background-color: #022448;
+.entries-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.entries-form textarea[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
 }
 
 
@@ -152,11 +132,13 @@ button {
 
 .footer-wrapper {
     width: 100%;
+    margin: 0 auto;
 }
 
 #footer {
     background-color: #f0f0f0;
     padding: 10px;
+    border-radius: 20px;
     text-align: center;
 }
 

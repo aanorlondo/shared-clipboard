@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Header />
-    <div class="app-content">
-      <div class="entries-grid-wrapper">
-        <EntriesGrid />
-      </div>
-      <div class="form-wrapper">
-        <EntriesForm />
-      </div>
-      <div class="footer-wrapper">
-        <Footer />
-      </div>
+    <div class="header-wrapper">
+      <Header />
+    </div>
+    <div class="form-wrapper">
+      <EntriesForm />
+    </div>
+    <div class="entries-grid-wrapper">
+      <EntriesGrid />
+    </div>
+    <div class="footer-wrapper">
+      <Footer />
     </div>
   </div>
 </template>

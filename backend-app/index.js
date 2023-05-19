@@ -11,14 +11,14 @@ app.use(express.json())
 app.use(cors())
 
 // Backend env vars
-const port = process.env.BACKEND_PORT || 8080;
-const route = process.env.BACKEND_ROUTE || 'clipboards';
-const dbName = process.env.MONGO_DB_NAME || "clipboards"
-const mongo_collection = process.env.MONGO_COLLECTION_NAME || 'entries'
-const endpoint = `/${route}`
-const username = process.env.MONGO_USERNAME || '';
-const password = process.env.MONGO_PASSWORD || '';
-const mongoUrl = process.env.MONGO_URL || 'clipboard-mongodb-service';
+const port = process.env.BACKEND_PORT
+const route = process.env.BACKEND_ROUTE;
+const dbName = process.env.MONGO_DB_NAME;
+const mongo_collection = process.env.MONGO_COLLECTION_NAME;
+const endpoint = `/${route}`;
+const username = process.env.MONGO_USERNAME;
+const password = process.env.MONGO_PASSWORD;
+const mongoUrl = process.env.MONGO_URL;
 const mongoHost = `mongodb://${username}:${password}@${mongoUrl}/${dbName}`
 
 // MongoDB authentication options
@@ -96,4 +96,5 @@ app.get(endpoint, (req, res) => {
 
 app.listen(port, () => {
     console.log(`Backend app listening on port: ${port}`);
+    console.log(`MongoDB endpoint: ${mongoUrl}`)
 });

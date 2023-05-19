@@ -1,21 +1,22 @@
 <template>
-    <div class="entry-form">
+    <div class="form-container">
         <h3>Add new entry:</h3>
-        <form @submit.prevent="addEntry">
-            <textarea type="text" v-model="newEntry.content" placeholder="Paste Clipboard here"
-                class="entry-form resizable"></textarea>
-            <div class="submit-wrapper">
-                <button type="submit" class="entry-button">Save</button>
-            </div>
-        </form>
+        <div class="entries-form">
+            <form @submit.prevent="addEntry">
+                <textarea type="text" v-model="newEntry.content" placeholder="Paste Clipboard here"></textarea>
+                <div class="submit-wrapper">
+                    <button type="submit" class="entry-button">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
   
 <script>
-const host = process.env.VUE_APP_BACKEND_HOST || 'clipboard-app-service';
-const port = process.env.VUE_APP_BACKEND_PORT || '8080';
-const route = process.env.VUE_APP_BACKEND_ROUTE || 'clipboards';
-const endpoint = `http://${host}:${port}/${route}`;
+const host = process.env.VUE_APP_BACKEND_HOST;
+const port = process.env.VUE_APP_BACKEND_PORT;
+const route = process.env.VUE_APP_BACKEND_ROUTE;
+const endpoint = host == "localhost" ? `http://${host}:${port}/${route}` : process.env.VUE_APP_BACKEND_HOST;
 
 export default {
     data() {
