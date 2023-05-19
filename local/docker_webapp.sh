@@ -17,10 +17,16 @@ docker build -t negan/clipboard-webapp:local ../webapp
 docker push negan/clipboard-webapp:local
 
 
-# run the web app
+# run the backend app
 docker run \
     -d \
-    -p 80:80 \
+    -p 3000:3000 \
+    -e MONGO_USERNAME=$MONGO_USERNAME \
+    -e MONGO_PASSWORD=$MONGO_PASSWORD \
+    -e MONGO_URL=$MONGO_URL \
+    -e MONGO_DB_NAME=$MONGO_DB_NAME \
+    -e MONGO_COLLECTION_NAME=$MONGO_COLLECTION_NAME \
+    -e BACKEND_PORT=$BACKEND_PORT \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
     --name CLIPBOARDS-WEBAPP-LOCAL \
     negan/clipboard-webapp:local

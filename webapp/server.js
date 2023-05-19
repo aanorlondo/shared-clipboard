@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const { v4: uuidv4 } = require('uuid');
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
@@ -16,36 +17,29 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // Backend env vars
 const port = process.env.BACKEND_PORT
 const route = process.env.BACKEND_ROUTE;
-const dbName = process.env.MONGO_DB_NAME;
-const mongo_collection = process.env.MONGO_COLLECTION_NAME;
 const endpoint = `/${route}`;
-const username = process.env.MONGO_USERNAME;
-const password = process.env.MONGO_PASSWORD;
+
+// Mongo env vars
 const mongoUrl = process.env.MONGO_URL;
-const mongoHost = `mongodb://${username}:${password}@${mongoUrl}/${dbName}`
+const dbName = process.env.MONGO_DB_NAME;
+let username = process.env.MONGO_USERNAME;
+let password = process.env.MONGO_PASSWORD;
+
+// remove extra chars after decoding creds
+username = username.includes('-n ') ? username.replace('-n ', '') : username
+password = password.includes('-n ') ? password.replace('-n ', '') : password
+
+const mongo_collection = process.env.MONGO_COLLECTION_NAME;
+let mongoHost = `mongodb://${username}:${password}@${mongoUrl}/${dbName}`
+
+// remove line breaks
+mongoHost = mongoHost.replace(/\r?\n|\r/g, '')
 
 // MongoDB authentication options
 let mongoClientOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
-
-// Default GET route
-app.get('/', (req, res) => {
-    const htmlContent = `
-        <html>
-            <head>
-                <title>My Shared Clipboards Server</title>
-            </head>
-            <body>
-                <h3>My Shared Clipboards Server is running !<h3>
-                <p>Backend app listening on port: ${port}</p>
-                <p>MongoDB endpoint: ${mongoUrl}</p>
-            </body>
-        </html>
-    `;
-    res.send(htmlContent);
-});
 
 // Save clipboard entry to MongoDB
 app.post(endpoint, (req, res) => {
