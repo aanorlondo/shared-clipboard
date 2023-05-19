@@ -111,9 +111,9 @@ app.get(endpoint, (req, res) => {
     });
 });
 
-// Clear all clipboard entries in MongoDB
+// Clear entries from MongoDB
 app.delete(endpoint, (req, res) => {
-    console.log('Clearing all entries...');
+    console.log('Clearing entries...');
     console.log(`Connecting to Mongo host on: ${mongoHost}`);
     MongoClient.connect(mongoHost, mongoClientOptions, (err, client) => {
         if (err) {
@@ -126,17 +126,34 @@ app.delete(endpoint, (req, res) => {
         const db = client.db(dbName);
         const collection = db.collection(mongo_collection);
 
-        console.log(`Removing all entries from DB...`);
-        collection.deleteMany({}, (err) => {
-            if (err) {
-                console.error('Error clearing entries in MongoDB:', err);
-                res.status(500).send('Internal Server Error');
-                return;
-            }
+        if (Object.keys(req.body).length === 0) {
+            // Delete all entries
+            console.log(`Removing all entries from DB...`);
+            collection.deleteMany({}, (err) => {
+                if (err) {
+                    console.error('Error clearing entries in MongoDB:', err);
+                    res.status(500).send('Internal Server Error');
+                    return;
+                }
 
-            res.status(204).send('All entries cleared successfully');
-            client.close();
-        });
+                res.status(204).send('All entries cleared successfully');
+                client.close();
+            });
+        } else {
+            // Delete a specific entry based on ID
+            const { id } = req.body;
+            console.log(`Removing entry with ID ${id} from DB...`);
+            collection.deleteOne({ id }, (err) => {
+                if (err) {
+                    console.error('Error deleting entry in MongoDB:', err);
+                    res.status(500).send('Internal Server Error');
+                    return;
+                }
+
+                res.status(200).send(`Entry with ID ${id} deleted successfully`);
+                client.close();
+            });
+        }
     });
 });
 

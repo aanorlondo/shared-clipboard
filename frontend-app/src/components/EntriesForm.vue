@@ -28,6 +28,10 @@ export default {
     },
     methods: {
         async addEntry() {
+            if (this.newEntry.content.trim() === '') {
+                // Input is empty, do not proceed with adding the entry
+                return;
+            }
             try {
                 console.log(`Sending POST request: ${JSON.stringify(this.newEntry)} to endpoint: ${endpoint}`)
                 const response = await fetch(endpoint, {

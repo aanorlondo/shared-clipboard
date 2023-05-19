@@ -6,6 +6,7 @@
         <div v-for="entry in entries" :key="entry.id" class="entry-item">
             <p class="entry-content">{{ entry.content.content }}</p>
             <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
+            <button @click="deleteEntry(entry.id)">Delete</button>
         </div>
         <div v-if="entries.length === 0" class="no-data">No Data</div>
     </div>
@@ -47,18 +48,40 @@ export default {
         },
 
         async clearAllEntries() {
+            console.log(`Sending DELETE (ALL) request to endpoint: ${endpoint}`)
             try {
                 const response = await fetch(endpoint, {
                     method: 'DELETE'
                 });
                 if (response.ok) {
                     console.log('All entries cleared successfully!');
-                    this.entries = [];
+                    this.fetchEntries();
                 } else {
                     console.error('Failed to clear entries:', response.status, response.statusText);
                 }
             } catch (error) {
                 console.error('Error clearing entries:', error);
+            }
+        },
+
+        async deleteEntry(entryId) {
+            console.log(`Sending DELETE (${entryId}) request to endpoint: ${endpoint}`)
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: entryId }),
+                });
+                if (response.ok) {
+                    console.log('Entry deleted successfully!');
+                    this.fetchEntries();
+                } else {
+                    console.error('Failed to delete entry:', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error deleting entry:', error);
             }
         },
 

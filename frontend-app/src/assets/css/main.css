@@ -79,6 +79,14 @@ button:hover {
     width: 100%;
 }
 
+.entries-grid button {
+    background-color: #313233;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
 .entry-item {
     border-radius: 10px;
     padding: 10px;
