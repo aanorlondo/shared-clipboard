@@ -41,6 +41,11 @@ let mongoClientOptions = {
     useUnifiedTopology: true
 };
 
+// Serve static files for the "/" route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 // Save clipboard entry to MongoDB
 app.post(endpoint, (req, res) => {
     const content = req.body;
