@@ -14,6 +14,8 @@ spec:
       labels:
         app: clipboard-mongodb
     spec:
+
+      # CONTAINERS ---------
       containers:
         - name: clipboard-mongodb
           image: negan/clipboard-mongo:latest
@@ -50,10 +52,22 @@ spec:
                 configMapKeyRef:
                   name: clipboard-external-config
                   key: mongo-collection-name
-          
+
+          # volume mount
+          volumeMounts:
+            - name: mongodb-data
+              mountPath: /data/db
+
           # container port
           ports:
           - containerPort: 27017
+      
+      # VOLUMES ----------
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: clipboard-mongodb-pvc
+
 ---
 apiVersion: v1
 kind: Service
