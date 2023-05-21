@@ -211,9 +211,7 @@ button:hover {
 
 #footer {
     background-color: #2479d3;
-    padding: 10px;
     border-radius: 20px;
-    text-align: center;
 }
 
 .footer-content {
@@ -230,4 +228,14 @@ button:hover {
 .copy {
     font-size: 12px;
     color: #ffffff;
+    margin-right: 10px;
+}
+
+.vuejs-logo {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.nodejs-logo {
+    width: 70px;
 }
