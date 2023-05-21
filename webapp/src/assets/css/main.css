@@ -18,7 +18,7 @@ body {
 }
 
 button {
-    padding: 10px 20px;
+    padding: 5px 5px;
     background-color: #1369d2;
     color: #fff;
     border: none;
@@ -55,7 +55,7 @@ button:hover {
 }
 
 
-/* EntriesFrom */
+/* EntriesForm */
 
 .form-wrapper {
     min-width: 100%;
@@ -84,7 +84,7 @@ button:hover {
 }
 
 
-/* ENTRIES GRID */
+/* EntriesGrid */
 
 .entries-grid-wrapper {
     min-width: 100%;
@@ -131,11 +131,17 @@ button:hover {
 }
 
 .entries-grid button {
-    background-color: #313233;
+    background-color: transparent;
     color: #ffffff;
-    border-radius: 4px;
     font-size: 10px;
     cursor: pointer;
+    width: 15px;
+    padding: 10px 1px;
+}
+
+.delete-icon {
+    width: 14px;
+    height: auto;
 }
 
 .entry-item {

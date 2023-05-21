@@ -6,7 +6,9 @@
         <div v-for="entry in entries" :key="entry.id" class="entry-item">
             <div class="entry-header">
                 <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
-                <button @click="deleteEntry(entry.id)">Delete</button>
+                <button @click="deleteEntry(entry.id)" title="Delete item">
+                    <img src="../assets/media/delete_icon.png" class="delete-icon">
+                </button>
             </div>
             <p class="entry-content">{{ entry.content.content }}</p>
         </div>
