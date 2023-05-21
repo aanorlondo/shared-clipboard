@@ -35,6 +35,8 @@ export default {
         this.fetchEntries();
     },
     methods: {
+
+        // Fetch all entries
         async fetchEntries() {
             console.log(`Fetching GET request from endpoint: ${endpoint}`)
             try {
@@ -50,7 +52,14 @@ export default {
             }
         },
 
+        // Clear all entries
         async clearAllEntries() {
+            const confirmation_text = "Hold on a second 🙅 🙆 \nAre you sure you want to delete all entries 🤷 ⁉️";
+            let confirmation = confirm(confirmation_text);
+            if (!confirmation) {
+                return;
+            }
+
             console.log(`Sending DELETE (ALL) request to endpoint: ${endpoint}`)
             try {
                 const response = await fetch(endpoint, {
@@ -67,6 +76,7 @@ export default {
             }
         },
 
+        // Delete one
         async deleteEntry(entryId) {
             console.log(`Sending DELETE (${entryId}) request to endpoint: ${endpoint}`)
             try {
