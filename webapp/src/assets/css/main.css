@@ -208,7 +208,7 @@ button:hover {
     justify-content: center;
 }
 
-.github-logo {
+#github-logo {
     max-width: 70px;
     min-width: 45px;
 }
@@ -218,45 +218,93 @@ button:hover {
     color: #ffffff;
 }
 
-.vuejs-logo {
+#vuejs-logo {
     max-width: 40px;
     min-width: 25px
 }
 
-.nodejs-logo {
+#nodejs-logo {
     max-width: 70px;
     min-width: 40px
 }
 
-.github-logo,
+#github-logo,
 .copy,
-.vuejs-logo,
-.nodejs-logo {
+#vuejs-logo,
+#nodejs-logo {
     margin-right: 10px;
 }
 
 /* RESPONSIVE */
 
-@media (max-width: 600px) {
-
-    .github-logo {
-        width: 55px;
+@media (max-width: 1000px) {
+    .header-wrapper {
+        font-size: 10px;
     }
 
-    .vuejs-logo {
+    #header-logo {
+        width: 35px;
+    }
+
+    .entries-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+
+    .copy {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header-wrapper {
+        font-size: 8px;
+    }
+
+    #header-logo {
         width: 30px;
     }
 
-    .nodejs-logo {
+    .entries-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    #github-logo {
+        width: 55px;
+    }
+
+    .copy {
+        font-size: 8px;
+    }
+
+    #vuejs-logo {
+        width: 30px;
+    }
+
+    #nodejs-logo {
         width: 50px;
     }
 }
 
 @media (max-width: 400px) {
+    .header-wrapper {
+        font-size: 6px;
+    }
 
-    .github-logo,
-    .vuejs-logo,
-    .nodejs-logo {
+    #header-logo {
+        width: 25px;
+    }
+
+    .entries-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .copy {
+        font-size: 8px;
+    }
+
+    #github-logo,
+    #vuejs-logo,
+    #nodejs-logo {
         width: 10px;
     }
 }
