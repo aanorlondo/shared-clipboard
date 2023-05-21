@@ -118,18 +118,6 @@ button:hover {
     width: 100%;
 }
 
-@media (max-width: 600px) {
-    .entries-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-}
-
-@media (max-width: 400px) {
-    .entries-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    }
-}
-
 .entries-grid button {
     background-color: transparent;
     color: #ffffff;
@@ -221,21 +209,54 @@ button:hover {
 }
 
 .github-logo {
-    width: 70px;
-    margin-right: 10px;
+    max-width: 70px;
+    min-width: 45px;
 }
 
 .copy {
     font-size: 12px;
     color: #ffffff;
-    margin-right: 10px;
 }
 
 .vuejs-logo {
-    width: 40px;
-    margin-right: 10px;
+    max-width: 40px;
+    min-width: 25px
 }
 
 .nodejs-logo {
-    width: 70px;
+    max-width: 70px;
+    min-width: 40px
+}
+
+.github-logo,
+.copy,
+.vuejs-logo,
+.nodejs-logo {
+    margin-right: 10px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .github-logo {
+        width: 55px;
+    }
+
+    .vuejs-logo {
+        width: 30px;
+    }
+
+    .nodejs-logo {
+        width: 50px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .github-logo,
+    .vuejs-logo,
+    .nodejs-logo {
+        width: 10px;
+    }
 }
