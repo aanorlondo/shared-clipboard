@@ -1,6 +1,8 @@
 <template>
     <h1>{{ title }}</h1>
-    <img src="../assets/media/icon_2.png" id="header-logo">
+    <a :href="url">
+        <img src="../assets/media/icon_2.png" id="header-logo" alt="Logo">
+    </a>
 </template>
   
 <script>
@@ -8,9 +10,12 @@ export default {
     name: 'Header',
     data() {
         return {
-            title: 'My Shared clipboards App',
+            title: 'My Shared Clipboards App',
+            url: ''
         };
     },
+    mounted() {
+        this.url = `http://${window.location.host}`;
+    }
 };
 </script>
-  
