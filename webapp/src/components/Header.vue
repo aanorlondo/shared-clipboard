@@ -15,7 +15,7 @@ export default {
         };
     },
     mounted() {
-        this.url = `http://${window.location.host}`;
+        this.url = `http://${window.location.host}/clipboards-app`;
     }
 };
 </script>
