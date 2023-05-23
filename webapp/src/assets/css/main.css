@@ -17,6 +17,13 @@ body {
     overflow-y: auto;
 }
 
+@media (max-height: 450px) {
+    #app {
+        max-height: none;
+    }
+
+}
+
 button {
     padding: 5px 5px;
     background-color: #1369d2;
