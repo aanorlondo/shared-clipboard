@@ -1,0 +1,23 @@
+{
+    "name": "clipboard-webserver",
+    "version": "1.0.0",
+    "description": "Web application for clipboard sharing",
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongodb": "^4.3.2",
+        "uuid": "^8.3.2",
+        "cors": "^2.8.5"
+    },
+
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^5.0.0",
+        "@vue/cli-service": "^5.0.0",
+        "axios": "^1.4.0",
+        "vue": "^3.3.0",
+        "vue-template-compiler": "^2.7.00"
+    }
+}

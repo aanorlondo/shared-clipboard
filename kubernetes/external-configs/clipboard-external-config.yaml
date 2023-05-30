@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clipboard-external-config
+data:
+  mongo-url: clipboard-mongodb-service
+  mongo-db-name: clipboards
+  mongo-collection-name: entries
+  backend-route: clipboards
+

@@ -1,2 +1,2 @@
-# shared-paperclips
-A Kube-based project to share paperclips accross LAN devices
+# shared-clipboards
+A Kube-based project to share clipboards accross LAN devices

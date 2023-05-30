@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clipboard-mongodb-deployment
+  labels:
+    app: clipboard-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clipboard-mongodb
+  template:
+    metadata:
+      labels:
+        app: clipboard-mongodb
+    spec:
+
+      # CONTAINERS ---------
+      containers:
+        - name: clipboard-mongodb
+          image: negan/clipboard-mongo:latest
+          resources:
+            limits:
+              cpu: "1"
+              memory: 2Gi
+            requests:
+              cpu: "500m"
+              memory: 1Gi
+          
+          # env vars
+          env:
+            # secrets
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: clipboard-secrets
+                  key: mongo-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: clipboard-secrets
+                  key: mongo-password
+
+            # config maps
+            - name: MONGO_INITDB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: mongo-db-name
+            - name: MONGO_COLLECTION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: clipboard-external-config
+                  key: mongo-collection-name
+
+          # volume mount
+          volumeMounts:
+            - name: mongodb-data
+              mountPath: /data/db
+
+          # container port
+          ports:
+          - containerPort: 27017
+      
+      # VOLUMES ----------
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: clipboard-mongodb-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clipboard-mongodb-service
+spec:
+  selector:
+    app: clipboard-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
