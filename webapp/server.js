@@ -1,8 +1,10 @@
-const express = require('express');
-const path = require('path')
-const { v4: uuidv4 } = require('uuid');
 const { MongoClient } = require('mongodb');
+const { v4: uuidv4 } = require('uuid');
+const express = require('express');
+const axios = require('axios')
+const https = require('https')
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
 // Middleware
@@ -14,10 +16,20 @@ app.use(cors())
 // Serve front
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// Axios and HTTPS (bypass self-signed SSL cert)
+const agent = new https.Agent({ rejectUnauthorized: false });
+const axiosInstance = axios.create({
+    httpsAgent: agent
+});
+
 // Backend env vars
-const port = process.env.BACKEND_PORT
+const port = process.env.BACKEND_PORT;
 const route = process.env.BACKEND_ROUTE;
 const endpoint = `/${route}`;
+
+// Auth server env vars
+const authServer = process.env.AUTH_SERVER;
+const checkUserRoute = `${authServer}/user/check`
 
 // Mongo env vars
 const mongoUrl = process.env.MONGO_URL;
@@ -114,7 +126,28 @@ app.get(endpoint, (req, res) => {
 });
 
 // Clear entries from MongoDB
-app.delete(endpoint, (req, res) => {
+app.delete(endpoint, async (req, res) => {
+    console.log('Verifying caller privileges to perform DELETE actions...');
+    try {
+        const response = await axiosInstance.get(checkUserRoute, {
+            headers: {
+                Authorization: req.headers.authorization, // Pass the JWT token in the header
+            },
+        });
+        if (response.status === 200) {
+            // User has the required privileges, proceed with the deletion
+            console.log('User has the required privileges');
+        }
+        else {
+            throw Error('User does not have the required privileges')
+        }
+    } catch (error) {
+        // User does not have the required privileges, send an error response
+        console.log('User does not have the required privileges');
+        res.status(403).send('Forbidden');
+        return;
+    }
+
     console.log('Clearing entries...');
     console.log(`Connecting to Mongo host on: ${mongoHost}`);
     MongoClient.connect(mongoHost, mongoClientOptions, (err, client) => {
