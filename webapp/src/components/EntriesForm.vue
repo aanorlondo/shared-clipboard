@@ -15,7 +15,7 @@
 <script>
 const host = `${window.location.host}`;
 const route = process.env.VUE_APP_BACKEND_ROUTE;
-const endpoint = `http://${host}/${route}`;
+const endpoint = `https://${host}/${route}`;
 
 export default {
     data() {
