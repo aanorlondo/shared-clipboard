@@ -21,6 +21,7 @@
 </template>
   
 <script>
+import Cookies from 'js-cookie';
 const host = `${window.location.host}`;
 const route = process.env.VUE_APP_BACKEND_ROUTE;
 const endpoint = `https://${host}/${route}`;
@@ -60,16 +61,21 @@ export default {
                 return;
             }
 
+            const jwt = Cookies.get('jwt');
             console.log(`Sending DELETE (ALL) request to endpoint: ${endpoint}`)
             try {
                 const response = await fetch(endpoint, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    }
                 });
                 if (response.ok) {
                     console.log('All entries cleared successfully!');
                     this.fetchEntries();
                 } else {
                     console.error('Failed to clear entries:', response.status, response.statusText);
+                    alert('You are not authorized to perform this operation. Login with higher privileges !');
                 }
             } catch (error) {
                 console.error('Error clearing entries:', error);
@@ -78,12 +84,14 @@ export default {
 
         // Delete one
         async deleteEntry(entryId) {
+            const jwt = Cookies.get('jwt');
             console.log(`Sending DELETE (${entryId}) request to endpoint: ${endpoint}`)
             try {
                 const response = await fetch(endpoint, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
+                        Authorization: `Bearer ${jwt}`,
                     },
                     body: JSON.stringify({ id: entryId }),
                 });
@@ -92,6 +100,7 @@ export default {
                     this.entries = this.entries.filter((entry) => entry.id !== entryId);
                 } else {
                     console.error('Failed to delete entry:', response.status, response.statusText);
+                    alert('You are not authorized to perform this operation. Login with higher privileges !');
                 }
             } catch (error) {
                 console.error('Error deleting entry:', error);

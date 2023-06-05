@@ -50,7 +50,7 @@ button:hover {
     border-radius: 20px;
     font-size: 12px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -61,6 +61,36 @@ button:hover {
     vertical-align: middle;
 }
 
+#header-title-div {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+#header-session-div {
+    margin-top: -20px;
+    gap: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#header-session-div button {
+    background-color: #091a2b;
+}
+
+.header-form button {
+    background-color: transparent;
+}
+
+.header-form {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
 
 /* EntriesForm */
 
@@ -245,9 +275,6 @@ button:hover {
 /* RESPONSIVE */
 
 @media (max-width: 1000px) {
-    .header-wrapper {
-        font-size: 10px;
-    }
 
     #header-logo {
         width: 35px;
@@ -257,15 +284,18 @@ button:hover {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     }
 
-    .copy {
-        font-size: 10px;
+    .header-wrapper,
+    .copy,
+    .session-div {
+        font-size: 10px
+    }
+
+    #header-session-div {
+        margin-top: -15px;
     }
 }
 
 @media (max-width: 600px) {
-    .header-wrapper {
-        font-size: 8px;
-    }
 
     #header-logo {
         width: 30px;
@@ -279,7 +309,9 @@ button:hover {
         width: 55px;
     }
 
-    .copy {
+    .header-wrapper,
+    .copy,
+    .session-div {
         font-size: 8px;
     }
 
@@ -290,10 +322,16 @@ button:hover {
     #nodejs-logo {
         width: 50px;
     }
+
+    #header-session-div {
+        margin-top: -10px;
+    }
 }
 
 @media (max-width: 400px) {
-    .header-wrapper {
+
+    .header-wrapper,
+    .session-div {
         font-size: 6px;
     }
 
@@ -313,5 +351,9 @@ button:hover {
     #vuejs-logo,
     #nodejs-logo {
         width: 10px;
+    }
+
+    #header-session-div {
+        margin-top: -10px;
     }
 }
