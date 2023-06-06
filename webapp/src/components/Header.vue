@@ -192,13 +192,16 @@ export default {
         resetLoginForm() {
             this.loginForm.username = '';
             this.loginForm.password = '';
+            this.showLoginForm = false;
         },
         resetSignupForm() {
             this.signupForm.username = '';
             this.signupForm.password = '';
+            this.showSignupForm = false;
         },
         resetEditProfileForm() {
             this.editProfileForm.password = '';
+            this.showEditProfileForm = false;
         },
     },
 };
