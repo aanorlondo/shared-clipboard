@@ -90,6 +90,11 @@ button:hover {
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
+    align-items: center;
+}
+
+.logged-as {
+    margin-right: 5px;
 }
 
 /* EntriesForm */

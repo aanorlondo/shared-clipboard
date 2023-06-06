@@ -32,6 +32,7 @@
 
         <!-- Edit Profile Form -->
         <form class="header-form" v-if="showEditProfileForm" @submit.prevent="updateProfile">
+            <i class="logged-as"> Logged as '{{ getUsername() }}' </i>
             <input type="password" v-model="editProfileForm.password" placeholder="New Password" required>
             <button type="submit">✅</button>
             <button type="reset" @click="resetEditProfileForm">❌</button>
@@ -94,6 +95,7 @@ export default {
         signOut() {
             // Clear the JWT token cookie and update the login status
             Cookies.remove('jwt');
+            Cookies.remove('username');
             this.isLoggedIn = false;
             this.showEditProfileForm = false;
             this.showSignupForm = false;
@@ -120,6 +122,7 @@ export default {
                     .then(data => {
                         // Store the JWT token in the cookies
                         Cookies.set('jwt', data.token);
+                        Cookies.set('username', username);
                         // Update the login status
                         this.isLoggedIn = true;
                         this.showLoginForm = false;
@@ -146,6 +149,7 @@ export default {
                     .then(data => {
                         // Store the JWT token in the cookies
                         Cookies.set('jwt', data.token);
+                        Cookies.set('username', username);
                         // Update the login status
                         this.isLoggedIn = true;
                         this.showLoginForm = false;
@@ -203,6 +207,9 @@ export default {
             this.editProfileForm.password = '';
             this.showEditProfileForm = false;
         },
+        getUsername() {
+            return Cookies.get('username')
+        }
     },
 };
 </script>
