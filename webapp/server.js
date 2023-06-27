@@ -28,7 +28,7 @@ const route = process.env.BACKEND_ROUTE;
 const endpoint = `/${route}`;
 
 // Auth server env vars
-const authServer = process.env.AUTH_SERVER;
+const authServer = process.env.AUTH_SERVER.toLocaleLowerCase();
 const checkUserRoute = `${authServer}/user/check`
 
 // Mongo env vars
@@ -139,6 +139,7 @@ app.delete(endpoint, async (req, res) => {
             console.log('User has the required privileges');
         }
         else {
+            console.log(response.Error)
             throw Error('User does not have the required privileges')
         }
     } catch (error) {

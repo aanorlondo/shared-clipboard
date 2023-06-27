@@ -30,5 +30,6 @@ docker run \
     -e MONGO_COLLECTION_NAME=$MONGO_COLLECTION_NAME \
     -e BACKEND_PORT=$BACKEND_PORT \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
+    -e AUTH_SERVER=$AUTH_SERVER \
     --name CLIPBOARDS-WEBAPP-LOCAL \
     negan/clipboard-webapp:local
