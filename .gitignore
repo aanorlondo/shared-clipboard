@@ -3,6 +3,8 @@ node_modules/
 
 # Ignore build artifacts
 dist/
+*.tar
+*.gz
 
 # Ignore environment variables file
 .env*
