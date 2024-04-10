@@ -4,10 +4,10 @@ db = db.getSiblingDB(process.env.MONGO_INITDB_DATABASE);
 print('DONE.');
 
 // Create a new user with root privileges
-let mongouser = process.env.MONGO_INITDB_ROOT_USERNAME
-mongouser = mongouser.includes('-n ') ? mongouser.replace('-n ', '') : mongouser
-let mongopassword = process.env.MONGO_INITDB_ROOT_PASSWORD
-mongopassword = mongopassword.includes('-n ') ? mongopassword.replace('-n ', '') : mongopassword
+let mongouser = process.env.MONGO_INITDB_ROOT_USERNAME;
+mongouser = mongouser.includes('-n ') ? mongouser.replace('-n ', '') : mongouser;
+let mongopassword = process.env.MONGO_INITDB_ROOT_PASSWORD;
+mongopassword = mongopassword.includes('-n ') ? mongopassword.replace('-n ', '') : mongopassword;
 
 print(`Creating 'readWrite' role and user: ${mongouser}`);
 db.createUser({
@@ -18,9 +18,9 @@ db.createUser({
         db: process.env.MONGO_INITDB_DATABASE
     }]
 });
-print('DONE.')
+print('DONE.');
 
 // Create base collection
 print(`Creating collection: ${process.env.MONGO_COLLECTION_NAME}`);
 db.createCollection(process.env.MONGO_COLLECTION_NAME);
-print('DONE.')
+print('DONE.');
