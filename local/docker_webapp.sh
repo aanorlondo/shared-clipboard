@@ -10,12 +10,11 @@ echo "VUE_APP_AUTH_SERVER=${AUTH_SERVER}" >> "../webapp/.env.production"
 
 # clean first
 docker rm -f CLIPBOARDS-WEBAPP-LOCAL
-docker rmi negan/clipboard-webapp:local
 
 
 # build the web app
-docker build -t negan/clipboard-webapp:local ../webapp
-docker push negan/clipboard-webapp:local
+docker build -t negan/clipboard-webapp:rasp4 ../webapp
+docker push negan/clipboard-webapp:rasp4
 
 
 # run the backend app
@@ -31,4 +30,4 @@ docker run \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
     -e AUTH_SERVER=$AUTH_SERVER \
     --name CLIPBOARDS-WEBAPP-LOCAL \
-    negan/clipboard-webapp:local
+    negan/clipboard-webapp:rasp4

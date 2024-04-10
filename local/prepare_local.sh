@@ -5,7 +5,7 @@ export HOSTNAME=$(hostname)
 # webapp
 export MONGO_USERNAME="username"
 export MONGO_PASSWORD="password"
-export MONGO_URL="host.docker.internal:27017"
+export MONGO_URL="172.17.0.1:27017" #"host.docker.internal:27017"
 export MONGO_DB_NAME="clipboards"
 export MONGO_COLLECTION_NAME="entries"
 export BACKEND_PORT="3000"

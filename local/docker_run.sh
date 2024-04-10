@@ -16,7 +16,7 @@ docker run \
     -e MONGO_INITDB_DATABASE=$MONGO_DB_NAME \
     -e MONGO_COLLECTION_NAME=$MONGO_COLLECTION_NAME \
     --name CLIPBOARDS-MONGO-LOCAL \
-    negan/clipboard-mongo:local
+    negan/clipboard-mongo:rasp4
 
 
 # run the backend app
@@ -32,4 +32,4 @@ docker run \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
     -e AUTH_SERVER=$AUTH_SERVER \
     --name CLIPBOARDS-WEBAPP-LOCAL \
-    negan/clipboard-webapp:local
+    negan/clipboard-webapp:rasp4
