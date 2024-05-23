@@ -6,9 +6,14 @@
         <div v-for="entry in entries" :key="entry.id" class="entry-item">
             <div class="entry-header">
                 <p class="timestamp">{{ formatDate(entry.timestamp) }}</p>
-                <button @click="deleteEntry(entry.id)" title="Delete item">
-                    <img src="../assets/media/delete_icon.png" class="delete-icon">
-                </button>
+                <div class="buttons">
+                    <button @click="copyEntry(entry.id)" title="Copy item">
+                        <img src="../assets/media/copy_icon.png" class="copy-icon">
+                    </button>
+                    <button @click="deleteEntry(entry.id)" title="Delete item">
+                        <img src="../assets/media/delete_icon.png" class="delete-icon">
+                    </button>
+                </div>
             </div>
             <p class="entry-content">{{ entry.content.content }}</p>
         </div>
@@ -107,6 +112,25 @@ export default {
             }
         },
 
+        // Copy entry content
+        async copyEntry(entryId) {
+            const entry = this.entries.find(entry => entry.id === entryId);
+            if (!entry) {
+                console.error('Entry not found');
+                return;
+            }
+            const entryContent = entry.content.content;
+
+            try {
+                await navigator.clipboard.writeText(entryContent);
+                alert('Entry content copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy entry content. Please try again.');
+            }
+        },
+
+        // Format date
         formatDate(timestamp) {
             const date = new Date(timestamp);
             const options = {
