@@ -112,6 +112,25 @@ export default {
             }
         },
 
+        // Copy entry content
+        async copyEntry(entryId) {
+            const entry = this.entries.find(entry => entry.id === entryId);
+            if (!entry) {
+                console.error('Entry not found');
+                return;
+            }
+            const entryContent = entry.content.content;
+
+            try {
+                await navigator.clipboard.writeText(entryContent);
+                alert('Entry content copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                alert('Failed to copy entry content. Please try again.');
+            }
+        },
+
+        // Format date
         formatDate(timestamp) {
             const date = new Date(timestamp);
             const options = {
