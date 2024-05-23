@@ -123,10 +123,8 @@ export default {
 
             try {
                 await navigator.clipboard.writeText(entryContent);
-                alert('Entry content copied to clipboard!');
             } catch (err) {
                 console.error('Failed to copy text: ', err);
-                alert('Failed to copy entry content. Please try again.');
             }
         },
 
