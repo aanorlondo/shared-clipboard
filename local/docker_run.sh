@@ -18,6 +18,8 @@ docker run \
     --name CLIPBOARDS-MONGO-LOCAL \
     negan/clipboard-mongo:rasp4
 
+host_ip=$(hostname -I | awk '{print $1}')
+hostname=$(hostname)
 
 # run the backend app
 docker run \
@@ -31,5 +33,7 @@ docker run \
     -e BACKEND_PORT=$BACKEND_PORT \
     -e BACKEND_ROUTE=$BACKEND_ROUTE \
     -e AUTH_SERVER=$AUTH_SERVER \
+    --add-host="host:${host_ip}" \
+    --add-host="${hostname}:${host_ip}" \
     --name CLIPBOARDS-WEBAPP-LOCAL \
     negan/clipboard-webapp:rasp4
